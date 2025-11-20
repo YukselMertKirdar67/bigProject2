@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Employee</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        a {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #007bff;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h1>Add New Employee</h1>
+
+<form th:action="@{/add}" th:object="${emp}" method="post" enctype="multipart/form-data">
+    <label>Name:</label>
+    <input type="text" th:field="*{ename}" placeholder="Enter name" required/>
+
+    <label>Job:</label>
+    <input type="text" th:field="*{job}" placeholder="Enter job" />
+
+    <label>HireDate:</label>
+    <input type="date" th:field="*{hiredate}" placeholder="Enter hiredate"/>
+
+    <label>Salary:</label>
+    <input type="number" th:field="*{sal}" placeholder="Enter salary"/>
+
+    <label>Commission:</label>
+    <input type="number" th:field="*{comm}" placeholder="Enter commission"/>
+
+    <label>Manager:</label>
+    <input type="text"
+           th:field="*{mgr.empno}"
+           placeholder="Enter Manager"
+           list="managers"
+           pattern="7839|7698|7566|7788|7782"
+           required />
+
+    <datalist id="managers">
+        <option value="7839">
+        <option value="7698">
+        <option value="7566">
+        <option value="7788">
+        <option value="7782">
+    </datalist>
+
+
+    <label>Department:</label>
+    <input type="number" th:field="*{dept.deptno}" placeholder="Enter Department" min="10" max="40" step="10">
+
+
+
+
+
+    <label>Image:</label>
+    <input type="file" name="img"/>
+
+    <button type="submit">Save</button>
+</form>
+
+<a th:href="@{/}">Back</a>
+</body>
+</html>
+
